@@ -1,9 +1,15 @@
+__author__ = "Szymon 'vlakoosh' Walkusz"
+__version__ = "15.06.2023"
+__credits__ = []
+__status__ = "Finished / Not Balanced"
+
 import random
 import time
 import os
 
 MAX_BET = 100
 MIN_BET = 5
+
 
 bal = 0
 bet = 20

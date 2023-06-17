@@ -1,7 +1,7 @@
 __author__ = "Szymon 'vlakoosh' Walkusz"
 __version__ = "15.06.2023"
 __credits__ = []
-__status__ = "Finished / Not Balanced"
+__status__ = "Finished"
 
 import random
 import time
@@ -10,18 +10,20 @@ import os
 MAX_BET = 100
 MIN_BET = 5
 
-
+#on-screen variables
 bal = 0
 bet = 20
 win = 0
 label = "ROLL ME"
 
+#stores current slot confifguration
 slots = [
 	['X', 'X', 'X'],
 	['X', 'X', 'X'],
 	['X', 'X', 'X']
 ]
 
+#stores possible slot outcomes and how  many of each
 symbols = { 
 	"7" : 1,
 	"$" : 1,
@@ -29,12 +31,15 @@ symbols = {
 	"%" : 1
 }
 
+#stores slot outcomes and their win multipliers
 symbol_multipliers = {
 	"7" : 100,
 	"$" : 20,
 	"#" : 1,
 	"%" : 1
 }
+
+#puts all possible slot outcomes in a single list
 def get_all_symbols(symbols):
 	all_symbols = []
 	for symbol, number in symbols.items():
@@ -42,9 +47,11 @@ def get_all_symbols(symbols):
 			all_symbols.append(symbol)
 	return all_symbols
 
+#clears console
 def clear():
 	os.system('cls' if os.name == 'nt' else 'clear')
 
+#allows the user to deposit money and add to "bal"
 def deposit():
 	global bal
 	clear()
@@ -56,6 +63,7 @@ def deposit():
 			print("Please enter a whole number")
 	bal = bal + int(answer)
 
+#allows the user to change current bet amount
 def change_bet():
 	global bet
 	clear()
@@ -72,7 +80,7 @@ def change_bet():
 			print("Please enter a whole number")
 	bet = int(answer)
 
-
+#checks if current slot configuration has 3 symbols in a row
 def check_win():
 	global label
 	global bet
@@ -97,7 +105,9 @@ def check_win():
 		label = "NO LUCK"	
 
 
-
+#creates the animation for slots
+#rolls new slot outcomes
+#updates balance and label if won/lost
 def animate_slots (symbols):
 	symbols = get_all_symbols(symbols)
 	for starting_row in range(0,3):
@@ -119,7 +129,7 @@ def animate_slots (symbols):
 	clear()
 	generate_machine(bal, bet, win, label)
 	return slots
-
+#generates formatted display text for slots
 def generate_slots():
 	pass
 	"|   | 7 | 7 | 7 |   |"
@@ -139,6 +149,7 @@ def generate_slots():
 	print("   |")
 	pass
 
+#generates the top of the slot machine with balance, bet, and last win
 def generate_top(bal, bet, win):
 	print(f"=-------------------=")
 	print(f"|  balance:  {bal:05d}  |")
@@ -162,7 +173,7 @@ def generate_machine(bal, bet, win, label):
 	generate_slots()
 	generate_bottom(label)
 	
-
+#main function where everything takes place
 def main():
 	global bal
 	global label

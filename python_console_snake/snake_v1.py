@@ -2,6 +2,7 @@ import time
 import os
 import random
 from pytimedinput import timedKey
+from colorama import Fore, Back, Style
 
 #game variables
 WIDTH = 20
@@ -85,22 +86,22 @@ def get_player_input():
 
 def generate_board():
 	#generate title and top border
-	print(title," "*(WIDTH-4-len(title)), "%04d" % (score))
-	print((WIDTH+2)*"#")
+	print(Fore.WHITE + title," "*(WIDTH-4-len(title)), "%04d" % (score))
+	print(Fore.WHITE + (WIDTH+2)*"#")
 
 	for row in range(0,HEIGHT):
-		print("#",end='')
+		print(Fore.WHITE + "#",end='')
 		for col in range(0,WIDTH):
 			if (row,col) == snake_head:
-				print(direction,end='')
+				print(Fore.GREEN + direction,end='')
 			elif (row,col) in snake_tiles:
-				print("O",end='')
+				print(Fore.GREEN + "O",end='')
 			elif (row,col) in berries:
-				print("$",end='')
+				print(Fore.RED + "$",end='')
 			else:
 				print(" ",end='')
-		print("#")
-	print((WIDTH+2)*"#")
+		print(Fore.WHITE + "#")
+	print(Fore.WHITE + (WIDTH+2)*"#")
 
 def check_finish():
 	game_over = not update_snake() 
